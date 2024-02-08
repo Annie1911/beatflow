@@ -2,15 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key = True)
     date_creation = models.DateTimeField(auto_now_add=True)
     nom_profile = models.CharField(max_length=255)
     nombre_abonner = models.IntegerField(default=0)
+    abonnements = models.ManyToManyField('self', symmetrical=False, related_name='abonnes', blank=True)
+    
 
     def __str__(self):
         return self.nom_profile
-
-
+    
+    
 
 
 class Post(models.Model):
@@ -31,6 +33,7 @@ class Post(models.Model):
         ('video', 'Vidéo')
     ]
 
+    utilisateur = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_publication = models.DateTimeField(auto_now_add=True)
     date_modifier = models.DateTimeField(auto_now=True)
     nbre_like = models.PositiveIntegerField(default=0)
@@ -43,9 +46,10 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='commentaires')
     contenu_comment = models.TextField()
     date_comment = models.DateTimeField(auto_now_add=True)
-    utili_comment = models.ForeignKey('User', on_delete=models.CASCADE) # Assurez-vous que le modèle d'utilisateur personnalisé est bien défini
+    utili_comment = models.ForeignKey('Profile', on_delete=models.CASCADE) # Assurez-vous que le modèle d'utilisateur personnalisé est bien défini
     video_Associéé = models.ForeignKey('Post', on_delete=models.CASCADE) # Assurez-vous que le modèle Post est bien défini
 
     def __str__(self):
