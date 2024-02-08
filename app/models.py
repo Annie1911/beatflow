@@ -11,6 +11,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.nom_profile
+
+    def get_absolute_url(self):
+        return reverse('accueil')
     
     
 
