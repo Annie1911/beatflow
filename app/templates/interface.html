@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parametre principale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+        .menu-item {
+            font-size: 16px;
+            text-decoration: none;
+            color: #fff;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .menu-item .text {
+            margin-left: 8px;
+        }
+        .menu-item:hover {
+            opacity: 1;
+        }
+        .feed {
+            margin-top: 20px;
+        }
+        .post {
+            background-color: #333;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .post-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .post-content {
+            font-size: 14px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px; /* Largeur de la barre de navigation */
+            height: 100%;
+            background-color: #1e2225; /* Couleur de fond */
+            padding-top: 20px; /* Espacement en haut */
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+            z-index: 900;
+        }
+        .navbar.closed {
+            width: 200px; /* Largeur réduite lorsque fermée */
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .navbar li {
+            margin-bottom: 30px;
+        }
+        .navbar a {
+            display: flex;
+            align-items: center; /* Centrage vertical */
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            transition: 0.3s ease;
+        }
+        .navbar a .icon {
+            margin-right: 20px;
+            transition: 1s;
+            font-size: 24px; /* Taille de la police des icônes */
+        }
+        .navbar.closed .menu-item .text {
+            display: none;
+        }
+        .content {
+            margin-left: 200px; /* Marge à gauche pour le contenu */
+            padding: 20px;
+            transition: width 0.3s ease;
+            z-index: 900;
+        }
+        .content.closed {
+            margin-left: 220px; /* Marge à gauche lorsque la barre de navigation est ouverte */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar closed" id="navbar">
+        <div class="logo">B</div>
+        <ul>
+            <li><a href="#"><span class="icon">&#127968;</span><span class="text">Accueil</span></a></li>
+            <li><a href="#"><span class="icon">&#128269;</span><span class="text">Recherche</span></a></li>
+            <li><a href="#"><span class="icon">&#127909;</span><span class="text">Reels</span></a></li>
+            <li><a href="#"><span class="icon">&#128150;</span><span class="text">Notifications</span></a></li>
+            <li><a href="{% url 'create_content' %}"><span class="icon">+</span><span class="text">Créer</span></a></li>
+            <li><a href="{% url 'profils' %}"><span class="icon">&#128100;</span><span class="text">Profils</span></a></li>
+            <div class="footer">
+                <a href="#"><span class="icon">&#9881;</span><span class="text">Paramètres</span></a>
+                <a href="#"><span class="icon">&#128682;</span><span class="text">Se déconnecter</span></a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="header">
+                <div class="logo text-center">BeatFlow</div>
+            </div>
+            <div class="feed">
+                <div class="post">
+                    <div class="post-title">Titre du post</div>
+                    <div class="post-content">
+                        <!-- Contenu de la publication (vidéo ou image) -->
+                        <video controls>
+                            <source src="video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- Si vous souhaitez afficher une image à la place de la vidéo, utilisez cette balise :
+                        <img src="image.jpg" alt="Image"> -->
+                    </div>
+                    <div class="post-footer mt-3">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-secondary"><i class="fas fa-heart"></i> J'aime</button>
+                            <button type="button" class="btn btn-outline-secondary"><i class="fas fa-comment"></i> Commenter</button>
+                            <button type="button" class="btn btn-outline-secondary"><i class="fas fa-share"></i> Partager</button>
+                        </div>
+                    </div>
+                    <div class="like-count mt-3">
+                        <span>J'aime : <strong>123</strong></span>
+                    </div>
+                </div>
+                <!-- Ajoutez d'autres publications ici -->
+            </div>
+        </div>
+        
+        
+        
+<div class="footer">
+    &copy; 2024 BeatFlow
+</div>
+
+    <div class="content" id="content">
+        <!-- Your content here -->
+    </div>
+
+    <script>
+        document.getElementById("navbar").addEventListener("mouseenter", function() {
+            this.classList.remove("closed");
+            document.getElementById("content").classList.remove("closed");
+        });
+
+        document.getElementById("navbar").addEventListener("mouseleave", function() {
+            this.classList.add("closed");
+            document.getElementById("content").classList.add("closed");
+        });
+    </script>
+</body>
+</html

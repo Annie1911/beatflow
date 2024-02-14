@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil utilisateur</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Assurez-vous d'inclure les liens vers les fichiers CSS et JS de Font Awesome si vous utilisez des icônes -->
+    <style>
+        /* Ajoutez ici vos styles CSS personnalisés */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            padding: 20px;
+            background-color: #000000;
+            border-bottom: 1px solid #333333;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .profile-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #333333;
+            border: 1px solid #666666;
+            border-radius: 8px;
+        }
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #333333;
+        }
+        .profile-details {
+            margin-left: 20px;
+        }
+        .profile-details h2 {
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 24px;
+        }
+        .profile-details p {
+            margin-bottom: 5px;
+            color: #cccccc;
+        }
+        .feed {
+            background-color: #333333;
+            border: 1px solid #666666;
+            border-radius: 8px;
+        }
+        .post {
+            padding: 20px;
+            border-bottom: 1px solid #666666;
+        }
+        .post:last-child {
+            border-bottom: none;
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        .post-content {
+            margin-bottom: 10px;
+            color: #cccccc;
+        }
+        .like-count {
+            color: #999999;
+        }
+        .btn-primary {
+            background-color: #0095f6;
+            border-color: #0095f6;
+        }
+        .btn-primary:hover {
+            background-color: #0083e0;
+            border-color: #0083e0;
+        }
+        .btn-outline-secondary {
+            color: #ffffff;
+            border-color: #666666;
+        }
+        .btn-outline-secondary:hover {
+            background-color: #666666;
+            border-color: #ffffff;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px; /* Largeur de la barre de navigation */
+            height: 100%;
+            background-color: #1e2225; /* Couleur de fond */
+            padding-top: 20px; /* Espacement en haut */
+            overflow-x: hidden;
+            transition: width 0.3s ease;
+            z-index: 900;
+        }
+        .navbar.closed {
+            width: 200px; /* Largeur réduite lorsque fermée */
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .navbar li {
+            margin-bottom: 30px;
+        }
+        .navbar a {
+            display: flex;
+            align-items: center; /* Centrage vertical */
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            transition: 0.3s ease;
+        }
+        .navbar a .icon {
+            margin-right: 20px;
+            transition: 1s;
+            font-size: 24px; /* Taille de la police des icônes */
+        }
+        .navbar.closed .menu-item .text {
+            display: none;
+        }
+        .content {
+            margin-left: 200px; /* Marge à gauche pour le contenu */
+            padding: 20px;
+            transition: width 0.3s ease;
+            z-index: 900;
+        }
+        .content.closed {
+            margin-left: 220px; /* Marge à gauche lorsque la barre de navigation est ouverte */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar closed" id="navbar">
+        <div class="logo">B</div>
+        <ul>
+            <li><a href="#"><span class="icon">&#127968;</span><span class="text">Accueil</span></a></li>
+            <li><a href="#"><span class="icon">&#128269;</span><span class="text">Recherche</span></a></li>
+            <li><a href="#"><span class="icon">&#127909;</span><span class="text">Reels</span></a></li>
+            <li><a href="#"><span class="icon">&#128150;</span><span class="text">Notifications</span></a></li>
+            <li><a href="{% url 'create_content' %}"><span class="icon">+</span><span class="text">   Créer</span></a></li>
+            <li><a href="{% url 'profils' %}"><span class="icon">&#128100;</span><span class="text">Profils</span></a></li>
+            <div class="footer">
+                <a href="#"><span class="icon">&#9881;</span><span class="text">Paramètres</span></a>
+                <a href="#"><span class="icon">&#128682;</span><span class="text">Se déconnecter</span></a>
+            </div>
+        </div>
+    <div class="container">
+        <div class="header">
+            <div class="logo text-center">BeatFlow</div>
+        </div>
+        <div class="profile-info">
+            <div class="profile-picture">
+                <!-- Ajoutez ici la photo de profil de l'utilisateur -->
+                <!-- Assurez-vous de remplacer 'profile-picture.jpg' par le chemin de la photo de profil de l'utilisateur -->
+                <img src="profile-picture.jpg" alt="Photo de profil">
+            </div>
+            <div class="profile-details">
+                <!-- Utilisez les informations du modèle Profile pour afficher les détails de l'utilisateur -->
+                <h2>{{ profile.nom_profile }}</h2>
+                <p>Date de création: {{ profile.date_creation }}</p>
+                <p>Nombre d'abonnés: {{ profile.nombre_abonner }}</p>
+                <!-- Ajoutez d'autres informations sur l'utilisateur ici -->
+                <button type="button" class="btn btn-primary">Modifier le profil</button>
+            </div>
+        </div>
+        <div class="feed">
+            <!-- Ajoutez ici les publications de l'utilisateur -->
+            <!-- Vous pouvez boucler à travers les publications de l'utilisateur et afficher chaque publication -->
+            {% for post in user_posts %}
+            <div class="post">
+                <div class="post-title">{{ post.title }}</div>
+                <div class="post-content">{{ post.content }}</div>
+                <div class="post-footer mt-3">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-secondary"><i class="fas fa-heart"></i> J'aime</button>
+                        <button type="button" class="btn btn-outline-secondary"><i class="fas fa-comment"></i> Commenter</button>
+                        <button type="button" class="btn btn-outline-secondary"><i class="fas fa-share"></i> Partager</button>
+                    </div>
+                </div>
+                <div class="like-count mt-3">
+                    <span>J'aime : <strong>{{ post.likes }}</strong></span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        document.getElementById("navbar").addEventListener("mouseenter", function() {
+            this.classList.remove("closed");
+            document.getElementById("content").classList.remove("closed");
+        });
+
+        document.getElementById("navbar").addEventListener("mouseleave", function() {
+            this.classList.add("closed");
+            document.getElementById("content").classList.add("closed");
+        });
+    </script>
+</body>
+</html>
